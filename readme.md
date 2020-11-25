@@ -1,38 +1,30 @@
-There will be 3 repositories:
-
-corporate-game (public)
-cbcm-analysis (private) linking to the game but also aggregating all resources and interests that I had
-
 # LICENSE
-AGPL v3.0
+see LICENSE.txt
 
-![alt text](https://github.com/positivedefinite/corpgame/blob/master/corpgame%20architecture.png "Software Architecture")
+# USAGE
 
+from corpgame import PolymatrixGame
+game_settings = {
+            "start_populations_matrix": [[4,4],[2,6],[10,0]],
+            "player_labels": [1,2,3],
+            "topology": "fully_connected",
+            'alpha': 1.0,
+            'log_level': "error",
+        }
+game = PolymatrixGame(**game_settings)
+strategies = [[0, 1, 0],[0, 0, 1], [1, 1, 0], [0, 1, 1]]
 
-# NASH SCALING
-Times that it took to find all nash equilibria by naive inspection of all strategies.
+X = [[]]*(len(strategies)+1)
+X[0] = game.state
 
-|Players |Seconds (estimate)|
-|:-------|:---------|
-|3       |0.0008804798126220703|
-|4       |0.0013201236724853516|
-|5       |0.0030183792114257812|
-|6       |0.008784055709838867|
-|7       |0.025992631912231445|
-|8       |0.03695416450500488|
-|9       |0.08102822303771973|
-|10      |0.18424010276794434|
-|11      |0.39885759353637695|
-|12      |0.896477222442627|
-|13      |2.021888494491577|
-|14      |4.515799522399902|
-|15      |9.836885213851929|
-|16      |20.718082666397095|
-|17      |46.46681213378906|
-|18      |102.37133288383484|
-|23      |(1 hour)|
-|27      |(1 day)|
-|31      |(1 month) |
-
-
-There are 31 countries in CBM research
+for i, p in enumerate(strategies):
+    game.play(p)
+    game.solve()
+    X[i+1] = game.state
+    print('round: ', i+1)
+    print('strategy: ', p)
+    print('state transition: \n', X[i+1]-X[i])
+    print('payoff: ', np.sum(X[i+1]-X[i], axis=1))
+    print('state: \n', game.state)
+    print('pne: ', game.pne)
+    print()
