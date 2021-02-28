@@ -4,3 +4,5 @@ __pycache_
 ./data/optimization/*
 *.pickle
 *.log
+
+token

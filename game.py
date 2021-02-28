@@ -1,8 +1,5 @@
-import plac, corpgame
-from logger import log
-
-
-
+import plac
+from src.polymatrix.polymatrixgame import QuickPolymatrixGame
 
 @plac.annotations(number_of_players=("Amount of players", "option", "n", int),
                     log_level=("Preferred level of logging", "option", "log", str),

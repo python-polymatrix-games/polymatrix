@@ -1,0 +1,3 @@
+plac
+numpy
+networkx
