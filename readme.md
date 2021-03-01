@@ -8,4 +8,9 @@ pip install polymatrixgames
 
 # USAGE
 
+# ARCHITECTURE
+
+![Polymatrix game software architecture](https://github.com/python-polymatrix-games/polymatrix-games/blob/main/corpgame%20architecture.png) "Polymatrix game software architecture")
+
+
 # LITERATURE
