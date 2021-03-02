@@ -22,8 +22,8 @@ class TestGame(unittest.TestCase):
 
     def test_class_type(self):
         self.assertTrue(
-            str(self.game.__class__) == "<class 'corpgame.PolymatrixGame'>",
-            "Type of object is not <class 'corpgame.PolymatrixGame'>",
+            str(self.game.__class__) == "<class 'polymatrix.polymatrixgame.PolymatrixGame'>",
+            f"Type of object is not <class 'polymatrix.polymatrixgame.PolymatrixGame'> but rather {self.game.__class__}",
         )
 
     def test_game_empty(self):
@@ -54,9 +54,13 @@ class TestGame(unittest.TestCase):
     def test_functionality_set_strategy_profile(self):
         self.game.initiate_players(start_populations_matrix=[[3, 0], [1, 2], [2, 1]])
         self.game.set_strategy_profile([0, 1, 1])
-        self.assertTrue(
-            True
-        )
+        with self.assertRaises(AttributeError):
+            self.game.play() # should throw an error because there are no edges in the graph yet
+
+    def test_functionality_play(self):
+        with self.assertRaises(TypeError):
+            self.game.play() # should throw an error because there are no players in the graph yet
+
 
 if __name__ == "__main__":
     unittest.main()
