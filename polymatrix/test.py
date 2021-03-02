@@ -1,7 +1,9 @@
 import unittest
-from corpgame import PolymatrixGame
-from player import Player
+from .polymatrixgame import PolymatrixGame
+from .player import Player
+
 game = PolymatrixGame()
+
 class TestPlayer(unittest.TestCase):
     def setUp(self):
         self.player = Player(population_vector=[1,2], index=1)

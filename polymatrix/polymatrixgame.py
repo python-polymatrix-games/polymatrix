@@ -1,9 +1,9 @@
 # following architecture guidelines from https://realpython.com/python-application-layouts/
 import os, random
 import numpy as np
-from logger import log
-from player import Player
-from multiplayergame import MultiplayerGame
+from .logger import log
+from .player import Player
+from .multiplayergame import MultiplayerGame
 from pprint import pprint
 import itertools
 from collections import defaultdict

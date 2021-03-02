@@ -1,8 +1,6 @@
 .ipynb_checkpoints
 __pycache_
-./data/logs/*
-./data/optimization/*
+./polymatrix/__pycache__
 *.pickle
 *.log
-
 token

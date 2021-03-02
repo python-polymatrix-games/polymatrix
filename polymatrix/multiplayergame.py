@@ -1,8 +1,8 @@
 import os, random
 import numpy as np
-from logger import log
-from player import Player
-from network import Network
+from .logger import log
+from .player import Player
+from .network import Network
 from collections import defaultdict
 import itertools
 
@@ -47,7 +47,7 @@ class MultiplayerGame: # ! change to NetworkGame
         self.edge_payoffs = defaultdict()
         for edge in itertools.permutations(player_labels, 2):
             self.edge_payoffs[edge]= np.array([0.,0.]) #! this creates new dictionary keys!
-        return self
+        #return self #__init__() should not return anything https://docs.quantifiedcode.com/python-anti-patterns/correctness/explicit_return_in_init.html
 
     def initiate_players(self, start_populations_matrix: list, player_labels=None):
         """ Adds players to the game one by one """

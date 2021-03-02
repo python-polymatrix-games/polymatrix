@@ -1,6 +1,6 @@
 import os
 import numpy as np
-from logger import log
+from .logger import log
 
 
 class Player:

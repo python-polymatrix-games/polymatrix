@@ -8,7 +8,7 @@ def read(fname):
 
 setuptools.setup(
     name="polymatrix",
-    version="0.0.1",
+    version="0.0.2",
     description="Tools for simulating and solving polymatrix games.",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
@@ -23,13 +23,9 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        "scikit-learn>=0.22.2",
-        "pandas>=1.0.0",
-        "matplotlib>=3.1.1",
         "scipy>=1.4.0",
-        "joblib>=0.13.2",
         "tqdm>=4.41.0",
-        "shap>=0.36.0",
+        "networkx>=2.5.0",
         "numpy>=1.19.0"
     ],
     url="https://github.com/python-polymatrix-games/polymatrix-games",
