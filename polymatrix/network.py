@@ -24,6 +24,8 @@ class Network(nx.Graph):
                 topology.append([nodes[-1], nodes[0]])
             elif topology == "star": # node 0 is the center
                 topology = [[nodes[0], nodes[i]] for i in range(1, len(nodes))]
+            elif topology =="random":
+                topology = [[nodes[edge[0]],nodes[edge[1]]] for edge in nx.erdos_renyi_graph(len(nodes), np.random.rand(1)).edges]
             else:
                 raise ValueError(
                     f"{self.__class__}.__init__ unrecognized network topology '{topology}', try 'fully_connected', 'ring', 'chain' or 'star'"

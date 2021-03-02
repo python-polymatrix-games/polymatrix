@@ -19,6 +19,9 @@ class MultiplayerGame: # ! change to NetworkGame
         log_level="info",
     ):
         self.alpha = alpha
+        self.manager = None 
+        self.timesteps = None 
+        self.game_settings = None
         self.players = None
         self.network = None
         self.loss_velocity = None

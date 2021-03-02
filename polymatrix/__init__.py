@@ -1,3 +1,3 @@
 name = "polymatrix"
 
-from .polymatrixgame import PolymatrixGame, GameManager, QuickPolymatrixGame
+from .main import PolymatrixGame, GameManager, QuickPolymatrixGame, QuickGame
