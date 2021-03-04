@@ -12,19 +12,18 @@ pip install polymatrix
 
 Making a quick game between randomly connected 7 players and simulating 5 random rounds:
 
-'''python
+```python
 game = polymatrix.QuickGame(7)
 game.simulate(5)
-'''
+```
 
 Making a game between 5 players on a ring topology (each player connected to two others) and with a starting state of 100 units for all players. Then play some strategy profiles:
 
-'''python
+```python
 game = polymatrix.PolymatrixGame(start_populations_matrix =[[100,100]]*5, topology="ring")
 game.play(strategy_profile = [0,1,1,1,0])
 print(game.state)
-'''
-
+```
 
 ## Architecture
 
