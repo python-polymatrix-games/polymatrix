@@ -29,7 +29,7 @@ print(game.state)
 
 The the high-level functionality (such as payoff functions) are in the PolymatrixGame class in polymatrixgame.py module, which inherits from more general MultiplayerGame from multiplayergame.py. The fundamental data of the game is information about the players (player.py) and how they are connected (network.py). The game network is really a networkx graph but with some extra methods (such as random edge addition/removal which I used for genetic programming). This is a high-level overview of dependencies:
 
-![Polymatrix game software architecture](https://github.com/python-polymatrix-games/polymatrix-games/blob/main/corpgame-architecture.png) "Polymatrix game software architecture")
+![Polymatrix game software architecture](https://github.com/python-polymatrix-games/polymatrix-games/blob/main/corpgame-architecture.png "Polymatrix game software architecture")
 
 
 ## Literature
