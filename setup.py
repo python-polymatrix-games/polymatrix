@@ -8,7 +8,7 @@ def read(fname):
 
 setuptools.setup(
     name="polymatrix",
-    version="0.0.2",
+    version="0.0.3",
     description="Tools for simulating and solving polymatrix games.",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
@@ -28,6 +28,6 @@ setuptools.setup(
         "networkx>=2.5.0",
         "numpy>=1.19.0"
     ],
-    url="https://github.com/python-polymatrix-games/polymatrix-games",
+    url="https://github.com/python-polymatrix-games/polymatrix",
     zip_safe=False,
 )
