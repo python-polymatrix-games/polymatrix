@@ -4,9 +4,9 @@ A simple library for simulating and solving [polymatrix games](https://en.wikipe
 Right now polymatrix can handle any amount of players and connections between them, but only two possible strategies and two state variables for each player. If your use case is not supported, reach out via email or post an issue, I'll see what I can do.
 
 ## Installation
-'''
+```
 pip install polymatrix
-'''
+```
 
 ## Usage
 
