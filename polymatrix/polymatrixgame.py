@@ -4,6 +4,7 @@ import numpy as np
 from .logger import log
 from .player import Player
 from .multiplayergame import MultiplayerGame
+from .payoff import PairFractional
 from pprint import pprint
 import itertools
 from collections import defaultdict
@@ -46,70 +47,28 @@ class PolymatrixGame(MultiplayerGame):
         payoff_matrix = np.zeros((len(self.players), 2))
         log.debug(f"{self.__class__}.get_payoff_matrix() init {payoff_matrix.tolist()}")
         network_edges = self.network.edges
+        self.pair_fractional = PairFractional(alpha = self.alpha, players = self.players)
         for pair in network_edges:
-            p1 = pair[0]
-            p2 = pair[1]
-            p1_payoff, p2_payoff = self.pair_fractional(p1, p2)
+            ip1 = pair[0]
+            ip2 = pair[1]
+            p1_payoff, p2_payoff = self.pair_fractional(ip1, ip2)
+            self.get_state()
+            p1 = self.players[ip1]
+            p2 = self.players[ip2]
+            assert np.all((p1_payoff + p2_payoff) == 0)  # check if zero sum
+            assert (p1.label, p2.label) in self.edge_payoffs
+            assert (p2.label, p1.label) in self.edge_payoffs
+            self.edge_payoffs[(p1.label, p2.label)]=p2_payoff
+            self.edge_payoffs[(p2.label, p1.label)]=p1_payoff
             log.debug(
                 f"{self.__class__}.get_payoff_matrix() payoffs {p1_payoff} {p2_payoff}"
             )
-            payoff_matrix[p1] += p1_payoff
-            payoff_matrix[p2] += p2_payoff
+            payoff_matrix[ip1] += p1_payoff
+            payoff_matrix[ip2] += p2_payoff
         log.debug(
             f"{self.__class__}.get_payoff_matrix() final {payoff_matrix.tolist()}"
         )
         self.payoff_matrix = payoff_matrix
-
-    def pair_fractional(self, player1: int, player2: int):
-        """ Computer payoff between two players (one edge) """
-        alpha = 1 / len(self.players)
-        p1 = self.players[player1]
-        p2 = self.players[player2]
-        p1_payoff = np.zeros(2)
-        p2_payoff = np.zeros(2)
-        if p1.strategy != p2.strategy:
-            log.debug(
-                f"{self.__class__}.pair_fractional() strategy pair is: ({p1.strategy},{p2.strategy})"
-            )
-            p1_losing_type = [1 - p1.strategy]
-            p1_losing_amount = self.payoff_function(
-                x=p1.population[p1_losing_type], alpha=alpha
-            )
-            p1_payoff[p1_losing_type] -= p1_losing_amount
-            p2_payoff[p1_losing_type] += p1_losing_amount
-            log.debug(
-                f"{self.__class__}.pair_fractional() p1 loss {p1_losing_type} {p1_losing_amount} {p1_payoff} {p2_payoff}"
-            )
-            p2_losing_type = [1 - p2.strategy]
-            p2_losing_amount = self.payoff_function(
-                x=p2.population[p2_losing_type], alpha=alpha
-            )
-            p2_payoff[p2_losing_type] -= p2_losing_amount
-            p1_payoff[p2_losing_type] += p2_losing_amount
-            log.debug(
-                f"{self.__class__}.pair_fractional() p2 loss {p2_losing_type} {p2_losing_amount} {p1_payoff} {p2_payoff}"
-            )
-        self.get_state()
-        assert np.all((p1_payoff + p2_payoff) == 0)  # check if zero sum
-        assert (p1.label, p2.label) in self.edge_payoffs
-        assert (p2.label, p1.label) in self.edge_payoffs
-        self.edge_payoffs[(p1.label, p2.label)]=p2_payoff
-        self.edge_payoffs[(p2.label, p1.label)]=p1_payoff
-        log.debug(p1.label, p1.strategy, p1_payoff, p2.label, p2.strategy, p2_payoff)
-        return [p1_payoff, p2_payoff]
-
-    def payoff_function(self, x: int, alpha: float = 0.1, roundoff=False):
-        """ A function that decides how much a player looses """
-        # ! alpha is overriden b self.alpha
-        y = x * self.alpha / (len(self.players) - 1)
-        # print(f'Payoff function x={x},alpha={self.alpha},not rounded y={y}')
-        if roundoff:
-            y = int(y)
-        log.debug(
-                f"{self.__class__}.payoff_function() y={y}"
-            )
-        assert y >= 0
-        return y
     
     def action_space(self):
         """ Only use under self.analyse """
