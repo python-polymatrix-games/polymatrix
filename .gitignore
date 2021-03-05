@@ -6,3 +6,4 @@ __pycache_
 token
 ./build
 ./dist
+./polymatrix.egg-info
