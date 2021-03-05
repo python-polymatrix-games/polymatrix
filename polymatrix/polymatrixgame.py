@@ -4,7 +4,7 @@ import numpy as np
 from .logger import log
 from .player import Player
 from .multiplayergame import MultiplayerGame
-from .payoff import PairFractional
+from .payoff import PayoffFunction
 from pprint import pprint
 import itertools
 from collections import defaultdict
@@ -46,9 +46,8 @@ class PolymatrixGame(MultiplayerGame):
         """ INSTANCE METHOD Computes payoffs for all player pairs (edges) """
         payoff_matrix = np.zeros((len(self.players), 2))
         log.debug(f"{self.__class__}.get_payoff_matrix() init {payoff_matrix.tolist()}")
-        network_edges = self.network.edges
-        self.pair_fractional = PairFractional(alpha = self.alpha, players = self.players)
-        for pair in network_edges:
+        self.pair_fractional = PayoffFunction(alpha = self.alpha, players = self.players)
+        for pair in self.network.edges: 
             ip1 = pair[0]
             ip2 = pair[1]
             p1_payoff, p2_payoff = self.pair_fractional(ip1, ip2)

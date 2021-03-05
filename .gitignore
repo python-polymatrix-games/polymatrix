@@ -4,3 +4,6 @@ __pycache_
 *.pickle
 *.log
 token
+./build
+./dist
+./polymatrix.egg-info
