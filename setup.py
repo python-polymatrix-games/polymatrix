@@ -8,7 +8,7 @@ def read(fname):
 
 setuptools.setup(
     name="polymatrix",
-    version="0.0.3",
+    version="0.0.4",
     description="Tools for simulating and solving polymatrix games.",
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
