@@ -4,3 +4,5 @@ __pycache_
 *.pickle
 *.log
 token
+./build
+./dist
