@@ -31,6 +31,10 @@ The the high-level functionality (such as payoff functions) are in the Polymatri
 
 ![Polymatrix game software architecture](https://github.com/python-polymatrix-games/polymatrix-games/blob/main/corpgame-architecture.png "Polymatrix game software architecture")
 
+There are 3 types of attributes to define a game:
+global_attributes, for example: probability of an edge existing, edge weight distribution, global utility etc
+player_attributes (specific to a node)
+link_attributes (specific to an edge)
 
 ## Literature
 
